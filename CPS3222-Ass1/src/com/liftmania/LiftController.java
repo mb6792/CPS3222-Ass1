@@ -10,7 +10,7 @@ public class LiftController {
 	int numFloors;
 	int numLifts;
 
-	Lift[] lifts;yhis
+	Lift[] lifts;
 
 	LiftsVisualiser visualiser;
 
