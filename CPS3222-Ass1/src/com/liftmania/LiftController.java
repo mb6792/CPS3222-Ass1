@@ -41,10 +41,8 @@ public class LiftController {
 	/**
 	 * Move a lift to a floor.
 	 * 
-	 * @param liftNumber
-	 *            - The lift number (1-based)
-	 * @param floorNumber
-	 *            - The floor to move to (0-based).
+	 * @param liftNumber - The lift number (1-based)
+	 * @param floorNumber - The floor to move to (0-based).
 	 */
 	public void moveLift(int liftNumber, int floorNumber) {
 		moveLift(lifts[liftNumber],  floorNumber);
@@ -60,8 +58,7 @@ public class LiftController {
 	/**
 	 * Closes the door of a particular lift.
 	 * 
-	 * @param liftNumber
-	 *            - The lift number (0-based)
+	 * @param liftNumber - The lift number (0-based)
 	 */
 	public void closeLiftDoor(int liftNumber) {
 		Lift lift = lifts[liftNumber];
