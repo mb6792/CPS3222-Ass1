@@ -67,16 +67,13 @@ public class LiftController {
 		Lift lift = lifts[liftNumber];
 		lift.closeDoors();
 
-/*		visualiser.addAnimationCommand(new AnimationCommand(
-				AnimationCommand.Command.close, liftNumber, lift.getFloor(), -1));
-	*/
+//		visualiser.addAnimationCommand(new AnimationCommand(AnimationCommand.Command.close, liftNumber, lift.getFloor(), -1));
 	}
 
 	/**
 	 * Open the door of a particular lift.
 	 * 
-	 * @param liftNumber
-	 *            - The lift number (0-based)
+	 * @param liftNumber - The lift number (0-based)
 	 */
 	public void openLiftDoor(int liftNumber) {
 		Lift lift = lifts[liftNumber];

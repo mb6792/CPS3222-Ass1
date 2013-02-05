@@ -37,10 +37,8 @@ public class Shaft extends JPanel implements Runnable {
 	/**
 	 * Constructs a Shaft object which houses a number of floors and lifts.
 	 * 
-	 * @param numFloors
-	 *            - The number of floors
-	 * @param numLifts
-	 *            - The number of lifts
+	 * @param numFloors - The number of floors
+	 * @param numLifts - The number of lifts
 	 */
 	public Shaft(LiftsVisualiser visualiser, int numFloors, Lift lift) {
 		this.visualiser = visualiser;
@@ -82,15 +80,13 @@ public class Shaft extends JPanel implements Runnable {
 		}
 
 		// Create top panel
-		add(new JLabel("Lift " + lift.getId(), JLabel.CENTER),
-				BorderLayout.NORTH);
+		add(new JLabel("Lift " + lift.getId(), JLabel.CENTER), BorderLayout.NORTH);
 
 		// Create floor buttons
 		JPanel buttonsPanel = new JPanel(new GridLayout(1, numFloors));
 		for (int j = 0; j < numFloors; j++) {
 			JButton btn = new JButton(Integer.toString(j));
-			btn.setActionCommand("move" + "," + Integer.toString(lift.getId()) + ","
-					+ Integer.toString(j));
+			btn.setActionCommand("move" + "," + Integer.toString(lift.getId()) + "," + Integer.toString(j));
 			btn.addActionListener(visualiser);
 			buttonsPanel.add(btn);
 		}
@@ -102,10 +98,8 @@ public class Shaft extends JPanel implements Runnable {
 	/**
 	 * Places a lift at a particular floor
 	 * 
-	 * @param lift
-	 *            - The lift number (0-based)
-	 * @param floor
-	 *            - The floor number (0-based)
+	 * @param lift - The lift number (0-based)
+	 * @param floor - The floor number (0-based)
 	 */
 
 	public void setLiftFloor(int floor) {
@@ -143,12 +137,9 @@ public class Shaft extends JPanel implements Runnable {
 	/**
 	 * Animates a lift moving to a particular floor
 	 * 
-	 * @param lift
-	 *            - The lift (zero-based)
-	 * @param fromFloor
-	 *            - The floor to start animation from (zero-based)
-	 * @param toFloor
-	 *            - The floor to animate to (zero-based)
+	 * @param lift - The lift (zero-based)
+	 * @param fromFloor - The floor to start animation from (zero-based)
+	 * @param toFloor - The floor to animate to (zero-based)
 	 */
 	public void animateLift(int toFloor) {
 
@@ -245,8 +236,7 @@ public class Shaft extends JPanel implements Runnable {
 	/**
 	 * Sets a particular lift to open.
 	 * 
-	 * @param lift
-	 *            - The lift number (zero-based)
+	 * @param lift - The lift number (zero-based)
 	 */
 	public void openDoors() {
 		liftColor = COLOR_DOORS_OPEN;
@@ -256,8 +246,7 @@ public class Shaft extends JPanel implements Runnable {
 	/**
 	 * Sets a particular lift to closed.
 	 * 
-	 * @param lift
-	 *            - The lift number (zero-based)
+	 * @param lift - The lift number (zero-based)
 	 */
 	public void closeDoors() {
 		liftColor = COLOR_DOORS_CLOSED;

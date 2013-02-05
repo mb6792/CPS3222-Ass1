@@ -27,8 +27,7 @@ public class LiftsVisualiser extends JFrame implements ActionListener {
 
 	LiftController controller;
 
-	public LiftsVisualiser(LiftController controller, int numFloors,
-			int numLifts) {
+	public LiftsVisualiser(LiftController controller, int numFloors, int numLifts) {
 		this.controller = controller;
 		this.numFloors = numFloors;
 		this.numLifts = numLifts;
@@ -48,8 +47,9 @@ public class LiftsVisualiser extends JFrame implements ActionListener {
 		for (int i = 0; i < numLifts; i++) {
 			shafts[i] = new Shaft(this, numFloors, controller.getLifts()[i]);
 			shaftsPanel.add(shafts[i]);
-			new Thread(shafts[i]).start(); // Put each shaft in a separate
-											// thread for independent animation
+			
+			// Put each shaft in a separate thread for independent animation
+			new Thread(shafts[i]).start();
 		}
 		add(shaftsPanel, BorderLayout.CENTER);
 
@@ -79,14 +79,12 @@ public class LiftsVisualiser extends JFrame implements ActionListener {
 	public void animateLiftMovement(Lift lift, int floorNumber) {
 		
 		//Delegate animation to the shaft responsible so processing can move on
-		shafts[lift.getId()].addAnimationCommand(new AnimationCommand(
-				AnimationCommand.Command.move, floorNumber));
+		shafts[lift.getId()].addAnimationCommand(new AnimationCommand(AnimationCommand.Command.move, floorNumber));
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		StringTokenizer tokenizer = new StringTokenizer(e.getActionCommand(),
-				",");
+		StringTokenizer tokenizer = new StringTokenizer(e.getActionCommand(), ",");
 		String cmd = tokenizer.nextToken();
 		if (cmd.equalsIgnoreCase("move")) {
 			int liftNumber = Integer.parseInt(tokenizer.nextToken());

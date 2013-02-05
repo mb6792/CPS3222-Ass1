@@ -48,8 +48,7 @@ public class Lift {
 	/**
 	 * Calculates the distance of a lift from a particular floor
 	 * 
-	 * @param floor
-	 *            - The floor number to measure distance to.
+	 * @param floor - The floor number to measure distance to.
 	 * @return
 	 */
 
