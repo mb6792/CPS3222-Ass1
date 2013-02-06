@@ -42,7 +42,12 @@ public class LiftControllerTest {
 
 	@Test
 	public void testMoveLiftLiftInt() {
-		fail("Not yet implemented");
+		try{
+			Thread.sleep(3000);
+			lc.moveLift(lc.lifts[1], 5);
+			Thread.sleep(3000);
+		}catch (Exception e){}
+		assertEquals(5, lc.lifts[1].getFloor());
 	}
 
 	@Test
@@ -59,7 +64,13 @@ public class LiftControllerTest {
 
 	@Test
 	public void testCallLiftToFloor() {
-		fail("Not yet implemented");
+		lc.lifts[0].floor = 1;
+		lc.lifts[1].floor = 2;
+		lc.callLiftToFloor(4);
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {}
+		assertEquals(4, lc.lifts[1].getFloor());
 	}
 
 	@Test
