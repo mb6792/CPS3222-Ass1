@@ -10,24 +10,30 @@ public class LiftController {
 	int numFloors;
 	int numLifts;
 
+	boolean randomizePositions;
+	
 	Lift[] lifts;
 
 	LiftsVisualiser visualiser;
 
-	public LiftController(int numFloors, int numLifts, boolean randomizePositons) {
-
+	public LiftController(LiftsVisualiser visualiser, int numFloors, int numLifts, boolean randomizePositions) {
 		this.numFloors = numFloors;
 		this.numLifts = numLifts;
+		
+		//added
+		this.visualiser = visualiser;
 
 		lifts = new Lift[numLifts];
 		for (int i = 0; i < numLifts; i++) {
 			lifts[i] = new Lift(i);
 		}
-
-		// Start visualiser
-		visualiser = new LiftsVisualiser(this, numFloors, numLifts);
 		
-		if (randomizePositons) {
+		//added
+		this.randomizePositions = randomizePositions;
+	}
+	
+	public void randomizePosition(){
+		if (this.randomizePositions) {
 			for (int i=0; i < numLifts; i++) {
 				moveLift(lifts[i], (int)(Math.random() * (numFloors)));
 			}
@@ -115,10 +121,6 @@ public class LiftController {
 		}
 		
 		return result;
-	}
-	
-	public static void main(String[] args) throws Exception {
-		new LiftController(4, 2, true);
 	}
 
 }

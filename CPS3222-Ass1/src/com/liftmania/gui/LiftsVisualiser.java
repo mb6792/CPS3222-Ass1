@@ -27,12 +27,15 @@ public class LiftsVisualiser extends JFrame implements ActionListener {
 
 	LiftController controller;
 
-	public LiftsVisualiser(LiftController controller, int numFloors, int numLifts) {
-		this.controller = controller;
+	public LiftsVisualiser(int numFloors, int numLifts) {
 		this.numFloors = numFloors;
 		this.numLifts = numLifts;
 		shafts = new Shaft[numLifts];
-
+	}
+	
+	public void setController(LiftController controller){
+		this.controller = controller;
+		
 		init();
 	}
 
