@@ -11,5 +11,4 @@ public class AnimationCommand {
 		this.command = command;
 		this.toFloor = toFloor;
 	}
-	
 }
