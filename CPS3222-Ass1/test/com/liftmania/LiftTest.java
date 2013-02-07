@@ -21,6 +21,13 @@ public class LiftTest {
 	}
 	
 	@Test
+	public void testGetIdNeg() {
+		lift = new Lift(-1);
+		int id = lift.getId();
+		assertEquals(-1, id);
+	}
+	
+	@Test
 	public void testIsMoving() {
 		boolean ans = lift.isMoving();
 		assertEquals(false, ans);
@@ -36,22 +43,19 @@ public class LiftTest {
 	@Test
 	public void testLift() {
 		lift = new Lift(1);
-		int id = lift.getId();
-		assertEquals(1, id);
+		assertEquals(1, lift.id);
 	}
 
 	@Test
 	public void testSetFloor() {
 		lift.setFloor(3);
-		int floor = lift.getFloor();
-		assertEquals(3, floor);
+		assertEquals(3, lift.floor);
 	}
 	
 	@Test
-	public void testSetFloor2() {
+	public void testSetFloorNeg() {
 		lift.setFloor(-2);
-		int floor = lift.floor;
-		assertEquals(-2, floor);
+		assertEquals(-2, lift.floor);
 	}
 
 	@Test
@@ -62,7 +66,7 @@ public class LiftTest {
 	}
 
 	@Test
-	public void testIsOpen() {
+	public void testIsOpenFalse() {
 		lift.doorsOpen = false;
 		boolean ans = lift.isOpen();
 		assertEquals(false, ans);
@@ -78,22 +82,25 @@ public class LiftTest {
 	@Test
 	public void testCloseDoors() {
 		lift.closeDoors();
-		boolean ans = lift.doorsOpen;
-		assertEquals(false, ans);
+		assertEquals(false, lift.doorsOpen);
 	}
 
 	@Test
 	public void testOpenDoors() {
 		lift.openDoors();
-		boolean ans = lift.doorsOpen;
-		assertEquals(true, ans);
+		assertEquals(true, lift.doorsOpen);
 	}
 
 	@Test
 	public void testDistanceFromFloor() {
 		lift.setFloor(0);
-		int dist = lift.distanceFromFloor(3);
-		assertEquals(3, dist);
+		assertEquals(3, lift.distanceFromFloor(3));
+	}
+	
+	@Test
+	public void testDistanceFromNegFloor() {
+		lift.setFloor(-2);
+		assertEquals(5, lift.distanceFromFloor(3));
 	}
 
 }
