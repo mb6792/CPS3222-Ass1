@@ -51,13 +51,11 @@ public class LiftController {
 	 * @param floorNumber - The floor to move to (0-based).
 	 */
 	public void moveLift(int liftNumber, int floorNumber) {
-		moveLift(lifts[liftNumber],  floorNumber);
+		visualiser.animateLiftMovement(liftNumber, floorNumber);
 	}
 	
-	public void moveLift(Lift lift, int floorNumber) {
-
-		//The animation process is trusted with updating the state of the lift (floorNumber, moving, etc)
-		visualiser.animateLiftMovement(lift, floorNumber);
+	public void moveLift(Lift lift, int floorNumber) {	
+		moveLift(lift.getId(),  floorNumber);
 	}
 	
 

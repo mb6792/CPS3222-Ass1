@@ -4,15 +4,26 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
+import org.jmock.Expectations;
+import org.jmock.Mockery;
+import org.jmock.lib.legacy.ClassImposteriser;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.liftmania.gui.LiftsVisualiser;
+
 public class LiftControllerTest {
 	LiftController lc;
+	Mockery context;
+	LiftsVisualiser visualiser;
 	
 	@Before
 	public void setUp() throws Exception {
-		lc = new LiftController(4, 2, true);
+		context = new Mockery(){{
+			setImposteriser(ClassImposteriser.INSTANCE);
+		}};
+		visualiser = context.mock(LiftsVisualiser.class);
+		lc = new LiftController(visualiser, 4, 2, true);
 	}
 
 	@Test
@@ -20,6 +31,7 @@ public class LiftControllerTest {
 		assertEquals(4, lc.numFloors);
 		assertEquals(2, lc.numLifts);
 		assertEquals(2, lc.lifts.length);
+		assertEquals(visualiser, lc.visualiser);
 	}
 
 	@Test
@@ -30,14 +42,22 @@ public class LiftControllerTest {
 
 	@Test
 	public void testMoveLiftIntInt() {
-		try {
-			Thread.sleep(3000);
-			lc.moveLift(1, 5);
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			
-		}
-		assertEquals(5, lc.lifts[1].getFloor());
+		context.checking(new Expectations(){{
+			oneOf(visualiser).animateLiftMovement(1, 5);
+		}});
+		
+		lc.moveLift(1, 5);
+		
+		context.assertIsSatisfied();
+		
+//		try {
+//			Thread.sleep(3000);
+//			lc.moveLift(1, 5);
+//			Thread.sleep(3000);
+//		} catch (InterruptedException e) {
+//			
+//		}
+//		assertEquals(5, lc.lifts[1].getFloor());
 	}
 
 	@Test
@@ -83,10 +103,4 @@ public class LiftControllerTest {
 		ArrayList<Lift> csl = lc.getClosestStationaryLifts(3);
 		assertEquals(1, csl.get(0).id);
 	}
-
-	@Test
-	public void testMain() {
-		fail("Not yet implemented");
-	}
-
 }

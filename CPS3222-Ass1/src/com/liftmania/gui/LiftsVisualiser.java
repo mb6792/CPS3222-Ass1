@@ -38,6 +38,14 @@ public class LiftsVisualiser extends JFrame implements ActionListener {
 		
 		init();
 	}
+	
+	public Shaft[] getShafts(){
+		return this.shafts;
+	}
+	
+	public void setShafts(Shaft shafts[]){
+		this.shafts = shafts;
+	}
 
 	public void init() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,11 +56,11 @@ public class LiftsVisualiser extends JFrame implements ActionListener {
 		// Create layout for shafts
 		JPanel shaftsPanel = new JPanel(new GridLayout(1, numLifts));
 		for (int i = 0; i < numLifts; i++) {
-			shafts[i] = new Shaft(this, numFloors, controller.getLifts()[i]);
+//			shafts[i] = new Shaft(this, numFloors, controller.getLifts()[i]);
 			shaftsPanel.add(shafts[i]);
 			
-			// Put each shaft in a separate thread for independent animation
-			new Thread(shafts[i]).start();
+//			// Put each shaft in a separate thread for independent animation
+//			new Thread(shafts[i]).start();
 		}
 		add(shaftsPanel, BorderLayout.CENTER);
 
@@ -79,10 +87,10 @@ public class LiftsVisualiser extends JFrame implements ActionListener {
 		setVisible(true);
 	}
 
-	public void animateLiftMovement(Lift lift, int floorNumber) {
+	public void animateLiftMovement(int liftId, int floorNumber) {
 		
 		//Delegate animation to the shaft responsible so processing can move on
-		shafts[lift.getId()].addAnimationCommand(new AnimationCommand(AnimationCommand.Command.move, floorNumber));
+		shafts[liftId].addAnimationCommand(new AnimationCommand(AnimationCommand.Command.move, floorNumber));
 	}
 
 	@Override
