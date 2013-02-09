@@ -108,12 +108,14 @@ public class LiftController {
 		
 		ArrayList<Lift> result = new ArrayList<Lift>();
 		
-		int distance = -1;
-		while (result.size() == 0) {
-			distance++;
-			for (Lift lift : lifts) {
-				if (lift.distanceFromFloor(floor) == distance && !lift.isMoving()) {
-					result.add(lift);
+		if(floor <= numFloors){
+			int distance = -1;
+			while (result.size() == 0) {
+				distance++;
+				for (Lift lift : lifts) {
+					if (lift.distanceFromFloor(floor) == distance && !lift.isMoving()) {
+						result.add(lift);
+					}
 				}
 			}
 		}

@@ -11,4 +11,12 @@ public class AnimationCommand {
 		this.command = command;
 		this.toFloor = toFloor;
 	}
+	
+	public Command getCommand(){
+		return command;
+	}
+	
+	public void setCommand(Command c){
+		this.command = c;
+	}
 }

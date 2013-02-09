@@ -9,6 +9,8 @@ import org.jmock.Mockery;
 import org.jmock.lib.legacy.ClassImposteriser;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
 
 import com.liftmania.gui.LiftsVisualiser;
 
@@ -16,6 +18,8 @@ public class LiftControllerTest {
 	LiftController lc;
 	Mockery context;
 	LiftsVisualiser visualiser;
+	
+	ExpectedException thrown = ExpectedException.none();
 	
 	@Before
 	public void setUp() throws Exception {
@@ -97,5 +101,29 @@ public class LiftControllerTest {
 		
 		ArrayList<Lift> csl = lc.getClosestStationaryLifts(3);
 		assertEquals(1, csl.get(0).id);
+	}
+	
+	@Test
+	public void testRandomizePosition(){
+		context.checking(new Expectations(){{
+			exactly(2).of(visualiser).animateLiftMovement(with(any(Integer.class)), with(any(Integer.class)));
+		}});
+		
+		lc.randomizePosition();
+		
+		context.assertIsSatisfied();
+	}
+	
+	@Test
+	public void testCallLiftToFloorError(){
+	    boolean thrown = false;
+
+	    try {
+	      lc.callLiftToFloor(6);
+	    } catch (Exception e) {
+	      thrown = true;
+	    }
+
+	    assertTrue(thrown);
 	}
 }
