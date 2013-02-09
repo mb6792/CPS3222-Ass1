@@ -49,25 +49,17 @@ public class LiftControllerTest {
 		lc.moveLift(1, 5);
 		
 		context.assertIsSatisfied();
-		
-//		try {
-//			Thread.sleep(3000);
-//			lc.moveLift(1, 5);
-//			Thread.sleep(3000);
-//		} catch (InterruptedException e) {
-//			
-//		}
-//		assertEquals(5, lc.lifts[1].getFloor());
 	}
 
 	@Test
 	public void testMoveLiftLiftInt() {
-		try{
-			Thread.sleep(3000);
-			lc.moveLift(lc.lifts[1], 5);
-			Thread.sleep(3000);
-		}catch (Exception e){}
-		assertEquals(5, lc.lifts[1].getFloor());
+		context.checking(new Expectations(){{
+			oneOf(visualiser).animateLiftMovement(1, 5);
+		}});
+		
+		lc.moveLift(lc.lifts[1], 5);
+		
+		context.assertIsSatisfied();
 	}
 
 	@Test
@@ -86,11 +78,14 @@ public class LiftControllerTest {
 	public void testCallLiftToFloor() {
 		lc.lifts[0].floor = 1;
 		lc.lifts[1].floor = 2;
+		
+		context.checking(new Expectations(){{
+			oneOf(visualiser).animateLiftMovement(1, 4);
+		}});
+		
 		lc.callLiftToFloor(4);
-		try {
-			Thread.sleep(6000);
-		} catch (InterruptedException e) {}
-		assertEquals(4, lc.lifts[1].getFloor());
+		
+		context.assertIsSatisfied();
 	}
 
 	@Test
