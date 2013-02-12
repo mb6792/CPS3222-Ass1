@@ -16,18 +16,28 @@ public class AnimationCommandTest {
 
 	@Test
 	public void testAnimationCommand() {
-		assertEquals(ac.command, AnimationCommand.Command.move);
+		assertEquals(ac.command, AnimationCommand.Command.valueOf("move"));
 		assertEquals(ac.toFloor, 2);
 	}
 	
 	@Test
-	public void testSetCommand(){
-		ac.setCommand(AnimationCommand.Command.open);
-		assertEquals(AnimationCommand.Command.open, ac.command);
+	public void testAnimationCommand2() {
+		ac = new AnimationCommand(AnimationCommand.Command.close, 3);
+		assertEquals(ac.command, AnimationCommand.Command.valueOf("close"));
+		assertEquals(ac.toFloor, 3);
 	}
 	
 	@Test
-	public void testGetCommand(){
-		assertEquals(AnimationCommand.Command.move, ac.getCommand());
+	public void testAnimationCommand3() {
+		ac = new AnimationCommand(AnimationCommand.Command.call, 4);
+		assertEquals(ac.command, AnimationCommand.Command.valueOf("call"));
+		assertEquals(ac.toFloor, 4);
+	}
+	
+	@Test
+	public void testAnimationCommand4() {
+		ac = new AnimationCommand(AnimationCommand.Command.open, 5);
+		assertEquals(ac.command, AnimationCommand.Command.valueOf("open"));
+		assertEquals(ac.toFloor, 5);
 	}
 }

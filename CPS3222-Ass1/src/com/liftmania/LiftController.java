@@ -2,7 +2,6 @@ package com.liftmania;
 
 import java.util.ArrayList;
 
-import com.liftmania.gui.AnimationCommand;
 import com.liftmania.gui.LiftsVisualiser;
 
 public class LiftController {

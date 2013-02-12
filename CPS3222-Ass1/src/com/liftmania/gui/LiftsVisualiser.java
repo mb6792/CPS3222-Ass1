@@ -1,12 +1,9 @@
 package com.liftmania.gui;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.StringTokenizer;
 
 import javax.swing.BoxLayout;
@@ -15,7 +12,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.liftmania.Lift;
 import com.liftmania.LiftController;
 
 @SuppressWarnings("serial")
