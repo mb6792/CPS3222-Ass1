@@ -19,6 +19,7 @@ public class LiftFactory{
 		lc = new LiftController(visualiser, numFloors, numLifts, randomizePositons);
 		setShafts();
 		visualiser.setController(lc);
+		visualiser.init();
 		lc.randomizePosition();
 	}
 	

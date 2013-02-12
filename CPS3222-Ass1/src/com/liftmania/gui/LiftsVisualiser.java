@@ -31,8 +31,6 @@ public class LiftsVisualiser extends JFrame implements ActionListener {
 	
 	public void setController(LiftController controller){
 		this.controller = controller;
-		
-		init();
 	}
 	
 	public Shaft[] getShafts(){

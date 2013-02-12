@@ -2,12 +2,15 @@ package com.liftmania.gui;
 
 import static org.junit.Assert.*;
 
+import java.awt.Color;
+
 import org.jmock.Mockery;
 import org.jmock.lib.legacy.ClassImposteriser;
 import org.junit.Before;
 import org.junit.Test;
 
 import com.liftmania.Lift;
+import com.liftmania.gui.AnimationCommand.Command;
 
 public class ShaftTest {
 	
@@ -41,17 +44,42 @@ public class ShaftTest {
 
 	@Test
 	public void testSetLiftFloorInt() {
-		fail("Not yet implemented");
+		shaft.setLiftFloor(3);
+		for(int i = 0; i < 30; i++){
+			assertEquals(Color.LIGHT_GRAY, shaft.grid[i].getBackground());
+		}
+		for(int i = 30; i < 40; i++){
+			assertEquals(Color.GREEN, shaft.grid[i].getBackground());
+		}
 	}
 
 	@Test
 	public void testSetLiftFloorIntInt() {
-		fail("Not yet implemented");
+		shaft.setLiftFloor(2, 3);
+		for(int i = 0; i < 17; i++){
+			assertEquals(Color.LIGHT_GRAY, shaft.grid[i].getBackground());
+		}
+		for(int i = 17; i < 27; i++){
+			assertEquals(Color.GREEN, shaft.grid[i].getBackground());
+		}
+		for(int i = 27; i < 30; i++){
+			assertEquals(Color.LIGHT_GRAY, shaft.grid[i].getBackground());
+		}
 	}
 
 	@Test
 	public void testIsAnimationStepOnFloor() {
-		fail("Not yet implemented");
+		assertFalse(shaft.isAnimationStepOnFloor(1, 1));
+	}
+	
+	@Test
+	public void testIsAnimationStepOnFloor2() {
+		assertTrue(shaft.isAnimationStepOnFloor(10, 1));
+	}
+	
+	@Test
+	public void testIsAnimationStepOnFloor3() {
+		assertTrue(shaft.isAnimationStepOnFloor(20, 2));
 	}
 
 	@Test
@@ -91,7 +119,9 @@ public class ShaftTest {
 
 	@Test
 	public void testAddAnimationCommand() {
-		fail("Not yet implemented");
+		AnimationCommand ac = new AnimationCommand(Command.call, 3);
+		shaft.addAnimationCommand(ac);
+		assertTrue(shaft.animationCommands.contains(ac));
 	}
 
 	@Test
