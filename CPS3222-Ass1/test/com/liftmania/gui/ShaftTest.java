@@ -84,22 +84,63 @@ public class ShaftTest {
 
 	@Test
 	public void testAnimateLift() {
-		fail("Not yet implemented");
+		shaft.animateLift(3);
+		
+		for(int i = 0; i < 30; i++){
+			assertEquals(Color.LIGHT_GRAY, shaft.grid[i].getBackground());
+		}
+		for(int i = 30; i < 40; i++){
+			assertEquals(Color.GREEN, shaft.grid[i].getBackground());
+		}
+		assertEquals(false, shaft.lift.isMoving());
+	}
+	
+	@Test
+	public void testAnimateLiftD() {
+		shaft.animateLift(0);
+		
+		for(int i = 0; i < 10; i++){
+			assertEquals(Color.GREEN, shaft.grid[i].getBackground());
+		}
+		for(int i = 10; i < 40; i++){
+			assertEquals(Color.LIGHT_GRAY, shaft.grid[i].getBackground());
+		}
+		assertEquals(false, shaft.lift.isMoving());
 	}
 
 	@Test
 	public void testAnimateUp() {
-		fail("Not yet implemented");
+		shaft.animateUp(2);
+		
+		for(int i = 0; i < 30; i++){
+			assertEquals(Color.LIGHT_GRAY, shaft.grid[i].getBackground());
+		}
+		for(int i = 30; i < 40; i++){
+			assertEquals(Color.GREEN, shaft.grid[i].getBackground());
+		}
 	}
 
 	@Test
 	public void testAnimateDown() {
-		fail("Not yet implemented");
+		shaft.animateDown(1);
+	
+		for(int i = 0; i < 10; i++){
+			assertEquals(Color.GREEN, shaft.grid[i].getBackground());
+		}
+		for(int i = 10; i < 40; i++){
+			assertEquals(Color.LIGHT_GRAY, shaft.grid[i].getBackground());
+		}
 	}
 
 	@Test
 	public void testHighlightGrid() {
-		fail("Not yet implemented");
+		shaft.highlightGrid(20, 40);
+		for(int i = 0; i < 20; i++){
+			assertEquals(Color.LIGHT_GRAY, shaft.grid[i].getBackground());
+		}
+		for(int i = 20; i < 40; i++){
+			assertEquals(Color.GREEN, shaft.grid[i].getBackground());
+		}
 	}
 
 	@Test
@@ -109,12 +150,38 @@ public class ShaftTest {
 
 	@Test
 	public void testOpenDoors() {
-		fail("Not yet implemented");
+		shaft.openDoors();
+		assertEquals(Color.RED, shaft.liftColor);
+		
+		//setLiftFloor
+		int floor = shaft.lift.getFloor();
+		for(int i = 0; i < floor; i++){
+			assertEquals(Color.LIGHT_GRAY, shaft.grid[i].getBackground());
+		}
+		for(int i = floor; i < (floor + 10); i++){
+			assertEquals(Color.RED, shaft.grid[i].getBackground());
+		}
+		for(int i = (floor + 10); i < 40; i++){
+			assertEquals(Color.LIGHT_GRAY, shaft.grid[i].getBackground());
+		}
 	}
 
 	@Test
 	public void testCloseDoors() {
-		fail("Not yet implemented");
+		shaft.closeDoors();
+		assertEquals(Color.GREEN, shaft.liftColor);
+		
+		//setliftfloor
+		int floor = shaft.lift.getFloor();
+		for(int i = 0; i < floor; i++){
+			assertEquals(Color.LIGHT_GRAY, shaft.grid[i].getBackground());
+		}
+		for(int i = floor; i < (floor + 10); i++){
+			assertEquals(Color.GREEN, shaft.grid[i].getBackground());
+		}
+		for(int i = (floor + 10); i < 40; i++){
+			assertEquals(Color.LIGHT_GRAY, shaft.grid[i].getBackground());
+		}
 	}
 
 	@Test
