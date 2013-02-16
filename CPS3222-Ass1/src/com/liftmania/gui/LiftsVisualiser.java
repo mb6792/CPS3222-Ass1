@@ -82,7 +82,6 @@ public class LiftsVisualiser extends JFrame implements ActionListener {
 	}
 
 	public void animateLiftMovement(int liftId, int floorNumber) {
-		
 		//Delegate animation to the shaft responsible so processing can move on
 		shafts[liftId].addAnimationCommand(new AnimationCommand(AnimationCommand.Command.move, floorNumber));
 	}

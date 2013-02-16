@@ -52,6 +52,10 @@ public class Shaft extends JPanel implements Runnable {
 
 		init();
 	}
+	
+	public Lift getLift(){
+		return lift;
+	}
 
 	/**
 	 * Initialises the UI
@@ -103,7 +107,6 @@ public class Shaft extends JPanel implements Runnable {
 	 */
 
 	public void setLiftFloor(int floor) {
-
 		for (int i = 0; i < animationStepsPerShaft; i++) {
 			if (isAnimationStepOnFloor(i, floor)) {
 				grid[i].setBackground(liftColor);
@@ -111,7 +114,7 @@ public class Shaft extends JPanel implements Runnable {
 				grid[i].setBackground(COLOR_SHAFT);
 			}
 		}
-
+		lift.setFloor(floor);
 	}
 
 	public void setLiftFloor(int floor, int offset) {
@@ -170,9 +173,9 @@ public class Shaft extends JPanel implements Runnable {
 		
 		//Open and close doorts
 		openDoors();
-		try {
-			Thread.sleep(2000);
-		} catch (Exception e) {}
+		
+		animationPause(2000);
+	
 		closeDoors();
 		
 		//Update lift state
@@ -187,7 +190,7 @@ public class Shaft extends JPanel implements Runnable {
 		int upper = lower + animationStepsPerFloor - 1;
 
 		for (int i = 0; i < animationStepsPerFloor; i++) {
-			animationPause();
+			animationPause(animationPause);
 			lower++;
 			upper++;
 
@@ -204,7 +207,7 @@ public class Shaft extends JPanel implements Runnable {
 		int upper = lower + animationStepsPerFloor - 1;
 
 		for (int i = 0; i < animationStepsPerFloor; i++) {
-			animationPause();
+			animationPause(animationPause);
 			lower--;
 			upper--;
 
@@ -225,12 +228,10 @@ public class Shaft extends JPanel implements Runnable {
 
 	}
 
-	protected void animationPause() {
+	protected void animationPause(long duration) {
 		try {
-			Thread.sleep(animationPause);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+			Thread.sleep(duration);
+		} catch (InterruptedException e) {}
 	}
 
 	/**
@@ -261,16 +262,17 @@ public class Shaft extends JPanel implements Runnable {
 		animationCommands.add(cmd);
 	}
 	
+	boolean testing = false;
+	public void setTesting(){
+		testing = true;
+	}
 
 	/**
 	 * The animation loop is placed in a separate thread for smoothness purposes.
 	 */
-	
 	@Override
 	public void run() {
-		
 		while (true) {
-			
 			if (animationCommands.size() > 0) {
 				AnimationCommand cmd = animationCommands.remove();
 				
@@ -283,15 +285,12 @@ public class Shaft extends JPanel implements Runnable {
 					openDoors();
 					//setLiftFloor(cmd.fromFloor);
 				}
+			}else if (testing == true){
+				break;
 			}
 			
-			try {
-				Thread.sleep(250);
-			} catch (Exception e) {}
-			
-			
-		}
-		
+			animationPause(250);	
+		}	
 	}
 
 }

@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.awt.Color;
 
+import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.lib.legacy.ClassImposteriser;
 import org.junit.Before;
@@ -23,9 +24,9 @@ public class ShaftTest {
 	@Before
 	public void setUp() throws Exception {
 		context = new Mockery(){{
-			lift = new Lift(1);
 			setImposteriser(ClassImposteriser.INSTANCE);
 		}};
+		lift = new Lift(1);
 		visualiser = context.mock(LiftsVisualiser.class);
 		shaft = new Shaft(visualiser, 4, lift);
 	}
@@ -83,7 +84,7 @@ public class ShaftTest {
 	}
 
 	@Test
-	public void testAnimateLift() {
+	public void testAnimateLift() {		
 		shaft.animateLift(3);
 		
 		for(int i = 0; i < 30; i++){
@@ -97,6 +98,8 @@ public class ShaftTest {
 	
 	@Test
 	public void testAnimateLiftD() {
+		shaft.setLiftFloor(3);
+		
 		shaft.animateLift(0);
 		
 		for(int i = 0; i < 10; i++){
@@ -145,7 +148,15 @@ public class ShaftTest {
 
 	@Test
 	public void testAnimationPause() {
-		fail("Not yet implemented");
+		boolean thrown = false;
+		
+		try{
+			shaft.animationPause(50);
+		}catch(Exception ie){
+			thrown = true;
+		}
+		
+		assertFalse(thrown);
 	}
 
 	@Test
@@ -153,15 +164,10 @@ public class ShaftTest {
 		shaft.openDoors();
 		assertEquals(Color.RED, shaft.liftColor);
 		
-		//setLiftFloor
-		int floor = shaft.lift.getFloor();
-		for(int i = 0; i < floor; i++){
-			assertEquals(Color.LIGHT_GRAY, shaft.grid[i].getBackground());
-		}
-		for(int i = floor; i < (floor + 10); i++){
+		for(int i = 0; i < 10; i++){
 			assertEquals(Color.RED, shaft.grid[i].getBackground());
 		}
-		for(int i = (floor + 10); i < 40; i++){
+		for(int i = 10; i < 40; i++){
 			assertEquals(Color.LIGHT_GRAY, shaft.grid[i].getBackground());
 		}
 	}
@@ -171,15 +177,10 @@ public class ShaftTest {
 		shaft.closeDoors();
 		assertEquals(Color.GREEN, shaft.liftColor);
 		
-		//setliftfloor
-		int floor = shaft.lift.getFloor();
-		for(int i = 0; i < floor; i++){
-			assertEquals(Color.LIGHT_GRAY, shaft.grid[i].getBackground());
-		}
-		for(int i = floor; i < (floor + 10); i++){
+		for(int i = 0; i < 10; i++){
 			assertEquals(Color.GREEN, shaft.grid[i].getBackground());
 		}
-		for(int i = (floor + 10); i < 40; i++){
+		for(int i = 10; i < 40; i++){
 			assertEquals(Color.LIGHT_GRAY, shaft.grid[i].getBackground());
 		}
 	}
@@ -190,10 +191,75 @@ public class ShaftTest {
 		shaft.addAnimationCommand(ac);
 		assertTrue(shaft.animationCommands.contains(ac));
 	}
-
+	
 	@Test
-	public void testRun() {
-		fail("Not yet implemented");
+	public void testBeforeSetTesting(){
+		assertEquals(false, shaft.testing);
+	}
+	
+	@Test
+	public void testSetTesting(){
+		shaft.setTesting();
+		assertEquals(true, shaft.testing);
 	}
 
+	@Test
+	public void testRunMove() {
+		AnimationCommand ac = new AnimationCommand(Command.move, 3);
+		shaft.addAnimationCommand(ac);
+		
+		shaft.setTesting();
+		shaft.run();
+		
+		for(int i = 0; i < 30; i++){
+			assertEquals(Color.LIGHT_GRAY, shaft.grid[i].getBackground());
+		}
+		for(int i = 30; i < 40; i++){
+			assertEquals(Color.GREEN, shaft.grid[i].getBackground());
+		}
+		assertEquals(false, shaft.lift.isMoving());
+	}
+
+	@Test
+	public void testRunClose() {
+		AnimationCommand ac = new AnimationCommand(Command.close, 2);
+		shaft.addAnimationCommand(ac);
+		
+		shaft.setTesting();
+		shaft.run();
+		
+		for(int i = 0; i < 20; i++){
+			assertEquals(Color.LIGHT_GRAY, shaft.grid[i].getBackground());
+		}
+		for(int i = 20; i < 30; i++){
+			assertEquals(Color.GREEN, shaft.grid[i].getBackground());
+		}
+		for(int i = 30; i < 40; i++){
+			assertEquals(Color.LIGHT_GRAY, shaft.grid[i].getBackground());
+		}
+		assertEquals(false, shaft.lift.isMoving());
+	}
+	
+	@Test
+	public void testRunOpen() {
+		AnimationCommand ac = new AnimationCommand(Command.open, 0);
+		shaft.addAnimationCommand(ac);
+		
+		shaft.setTesting();
+		shaft.setLiftFloor(3);
+		shaft.run();
+		
+		for(int i = 0; i < 30; i++){
+			assertEquals(Color.LIGHT_GRAY, shaft.grid[i].getBackground());
+		}
+		for(int i = 30; i < 40; i++){
+			assertEquals(Color.RED, shaft.grid[i].getBackground());
+		}
+		assertEquals(false, shaft.lift.isMoving());
+	}
+	
+	@Test
+	public void testGetLift(){
+		assertEquals(lift, shaft.getLift());
+	}
 }
