@@ -3,6 +3,7 @@ package com.liftmania.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
