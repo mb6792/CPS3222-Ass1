@@ -15,6 +15,24 @@ public class LiftTest {
 	}
 
 	@Test
+	public void testSetToFloor() {
+		lift.setToFloor(3);
+		assertEquals(3, lift.toFloor);
+	}
+	
+	@Test
+	public void testGetToFloor() {
+		lift.setToFloor(3);
+		assertEquals(3, lift.getToFloor());
+	}
+	
+	@Test
+	public void testResetToFloor() {
+		lift.resetToFloor();
+		assertEquals(-1, lift.toFloor);
+	}
+	
+	@Test
 	public void testGetId() {
 		int id = lift.getId();
 		assertEquals(id, 0);

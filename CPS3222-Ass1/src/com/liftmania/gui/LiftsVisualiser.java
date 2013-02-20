@@ -17,7 +17,7 @@ import com.liftmania.LiftController;
 @SuppressWarnings("serial")
 public class LiftsVisualiser extends JFrame implements ActionListener {
 
-	Shaft[] shafts;
+	public Shaft[] shafts;
 	int numFloors;
 	int numLifts;
 
@@ -82,6 +82,8 @@ public class LiftsVisualiser extends JFrame implements ActionListener {
 	}
 
 	public void animateLiftMovement(int liftId, int floorNumber) {
+		shafts[liftId].lift.setToFloor(floorNumber);
+		
 		//Delegate animation to the shaft responsible so processing can move on
 		shafts[liftId].addAnimationCommand(new AnimationCommand(AnimationCommand.Command.move, floorNumber));
 	}

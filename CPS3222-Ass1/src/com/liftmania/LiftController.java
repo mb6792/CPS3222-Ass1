@@ -88,23 +88,29 @@ public class LiftController {
 	 */
 	
 	public void callLiftToFloor(int floor) {
+		boolean foundMoving = false;
 		
-		//Find lifts closest to the required floor
-		ArrayList<Lift> closestLifts = getClosestStationaryLifts(floor);
-		
-		if (closestLifts.size() == 0) {
-			throw new RuntimeException("Could not find an available lift.");
+		for(Lift lift : lifts){
+			if(lift.getToFloor() == floor){//lift.isMoving() && lift.getFloor()==floor
+				foundMoving = true;
+			}
 		}
-		
-		//Pick random lift
-		Lift lift = closestLifts.get((int)(Math.random() * (closestLifts.size())));
-		
-		moveLift(lift, floor);
-
+		if(foundMoving == false){
+			//Find lifts closest to the required floor
+			ArrayList<Lift> closestLifts = getClosestStationaryLifts(floor);
+			
+			if (closestLifts.size() == 0) {
+				throw new RuntimeException("Could not find an available lift.");
+			}
+			
+			//Pick random lift
+			Lift lift = closestLifts.get((int)(Math.random() * (closestLifts.size())));
+			
+			moveLift(lift, floor);
+		}
 	}
 	
 	public ArrayList<Lift> getClosestStationaryLifts(int floor) {
-		
 		ArrayList<Lift> result = new ArrayList<Lift>();
 		
 		if(floor <= numFloors){

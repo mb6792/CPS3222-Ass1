@@ -93,7 +93,9 @@ public class ShaftTest {
 		for(int i = 30; i < 40; i++){
 			assertEquals(Color.GREEN, shaft.grid[i].getBackground());
 		}
+		
 		assertEquals(false, shaft.lift.isMoving());
+		assertEquals(-1, shaft.lift.getToFloor());
 	}
 	
 	@Test

@@ -7,6 +7,22 @@ public class Lift {
 	int floor = 0;
 	boolean doorsOpen = false;
 	
+	//added
+	int toFloor = -1;
+	
+	public void setToFloor(int toFloor){
+		this.toFloor = toFloor;
+	}
+	
+	public int getToFloor(){
+		return toFloor;
+	}
+	
+	public void resetToFloor(){
+		this.toFloor = -1;
+	}
+	
+	
 	
 	public int getId() {
 		return id;

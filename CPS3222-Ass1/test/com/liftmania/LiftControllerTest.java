@@ -114,7 +114,7 @@ public class LiftControllerTest {
 		context.assertIsSatisfied();
 	}
 	
-	@Test(expected = Exception.class)
+	@Test
 	public void testCallLiftToFloorError(){
 	    boolean thrown = false;
 

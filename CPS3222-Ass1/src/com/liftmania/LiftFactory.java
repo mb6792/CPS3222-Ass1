@@ -15,6 +15,10 @@ public class LiftFactory{
 	static Shaft[] shafts;
 	
 	public static void main (String args[]){
+		setAll();
+	}
+	
+	public static void setAll(){
 		visualiser = new LiftsVisualiser(numFloors, numLifts);
 		lc = new LiftController(visualiser, numFloors, numLifts, randomizePositons);
 		setShafts();

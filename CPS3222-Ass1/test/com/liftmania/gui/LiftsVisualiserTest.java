@@ -82,6 +82,7 @@ public class LiftsVisualiserTest {
 	
 		AnimationCommand ac = lv.shafts[0].animationCommands.peek();
 		
+		assertEquals(3, lv.shafts[0].lift.getToFloor());
 		assertEquals(AnimationCommand.Command.move, ac.command);
 		assertEquals(3, ac.toFloor);
 	}
