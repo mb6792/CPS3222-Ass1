@@ -8,6 +8,7 @@ import org.junit.Test;
 import nz.ac.waikato.modeljunit.Action;
 import nz.ac.waikato.modeljunit.FsmModel;
 import nz.ac.waikato.modeljunit.GreedyTester;
+import nz.ac.waikato.modeljunit.RandomTester;
 import nz.ac.waikato.modeljunit.StopOnFailureListener;
 import nz.ac.waikato.modeljunit.Tester;
 import nz.ac.waikato.modeljunit.VerboseListener;
@@ -91,6 +92,7 @@ public class LiftModel implements FsmModel {
 	
 	@Test
 	public void main(){
+//		Tester tester = new RandomTester(new LiftModel());
 		Tester tester = new GreedyTester(new LiftModel());
 		
 		tester.buildGraph();
@@ -106,6 +108,6 @@ public class LiftModel implements FsmModel {
 		
 		tester.generate(200);
 		
-		tester.getModel().printMessage(trCoverage.getName() + " was " + trCoverage.toString());
+		tester.printCoverage();
 	}
 }

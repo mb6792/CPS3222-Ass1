@@ -2,6 +2,8 @@ package com.liftmania;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import com.liftmania.gui.LiftsVisualiser;
 
 public class LiftController {
@@ -109,9 +111,29 @@ public class LiftController {
 			moveLift(lift, floor);
 		}
 	}
-	
+
 	public ArrayList<Lift> getClosestStationaryLifts(int floor) {
 		ArrayList<Lift> result = new ArrayList<Lift>();
+		
+		boolean foundInactive = false;
+		do{
+			foundInactive = false;
+			
+			for (Lift lift : lifts){
+				if(lift.isOpen()==false && lift.isMoving()==false){
+					foundInactive = true;
+				}
+			}
+						
+			if(foundInactive == false){
+				try {
+					Thread.sleep(50);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}while(foundInactive == false);
 		
 		if(floor <= numFloors){
 			int distance = -1;
