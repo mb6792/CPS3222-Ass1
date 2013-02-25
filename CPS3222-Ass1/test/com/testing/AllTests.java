@@ -18,3 +18,4 @@ import com.liftmania.gui.ShaftTest;
 public class AllTests {
 
 }
+ 

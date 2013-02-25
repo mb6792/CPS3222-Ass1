@@ -18,10 +18,10 @@ import nz.ac.waikato.modeljunit.coverage.TransitionCoverage;
 public class LiftModel implements FsmModel {
 	private Lift sut = new Lift(1);
 	
-	int id;
+//	int id;
 	boolean moving = false;
-	int floor = 0;
-	int toFloor = -1;
+//	int floor = 0;
+//	int toFloor = -1;
 	boolean doorsOpen = false;
 	
 	public enum LiftState {
@@ -106,7 +106,7 @@ public class LiftModel implements FsmModel {
 		verboseListener.setModel(tester.getModel());
 		tester.addListener(verboseListener);
 		
-		tester.generate(200);
+		tester.generate(4);
 		
 		tester.printCoverage();
 	}

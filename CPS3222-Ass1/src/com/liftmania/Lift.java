@@ -7,7 +7,7 @@ public class Lift {
 	int floor = 0;
 	boolean doorsOpen = false;
 	
-	//added
+	/*********************ADDED*********************/
 	int toFloor = -1;
 	
 	public void setToFloor(int toFloor){
@@ -21,13 +21,11 @@ public class Lift {
 	public void resetToFloor(){
 		this.toFloor = -1;
 	}
-	
-	
+	/**********************************************/
 	
 	public int getId() {
 		return id;
 	}
-
 
 	public boolean isMoving() {
 		return moving;
